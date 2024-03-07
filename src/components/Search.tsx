@@ -28,6 +28,8 @@ export const Search = (props: Props) => {
         const searchInput = e.target.value;
         const url = new URL(window.location.href);
 
+        url.searchParams.delete('page')
+
         if (searchInput !== '') {
             url.searchParams.set('beer_name', searchInput);
         } else {
