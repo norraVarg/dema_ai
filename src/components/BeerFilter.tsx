@@ -72,7 +72,7 @@ export const BeerFilter = () => {
                         value={filter.abv.abv_lt}
                         onChange={onChangeMaxAbv}
                         label="Max" variant="outlined" size="small" type='number' sx={{ width: 100 }} />
-                    <Button onClick={onClickApplyFilter} variant="contained" sx={{ padding: '0.34rem', width: 160 }}>
+                    <Button onClick={onClickApplyFilter} variant="contained" sx={{ padding: '0.35rem 0rem', minWidth: 120 }}>
                         Apply filters
                     </Button>
                 </Stack>
