@@ -64,10 +64,19 @@ export const BeerFilter = (props: Props) => {
         filterSignal.value = url.searchParams;
     }
 
+    const onClickClearFilter = () => {
+        const url = new URL(window.location.href);
+        url.searchParams.delete('abv_gt');
+        url.searchParams.delete('abv_lt');
+        window.history.pushState({}, '', url);
+        filterSignal.value = url.searchParams;
+        setFilter(DEFAULT_FILTER);
+    }
+
     return (
         <Container sx={sx}>
             <ThemeProvider theme={textFieldTheme}>
-                <Stack flexDirection='row' alignItems='center' gap={2}>
+                <Stack flexDirection='row' alignItems='center' gap={2} flexWrap={'wrap'}>
                     <FormLabel>ABV</FormLabel>
                     <TextField
                         value={filter.abv.abv_gt}
@@ -78,9 +87,14 @@ export const BeerFilter = (props: Props) => {
                         value={filter.abv.abv_lt}
                         onChange={onChangeMaxAbv}
                         label="Max" variant="outlined" size="small" type='number' sx={{ width: 100 }} />
-                    <Button onClick={onClickApplyFilter} variant="contained" sx={{ padding: '0.35rem 0rem', minWidth: 120 }}>
-                        Apply filters
-                    </Button>
+                    <Stack direction={'row'} gap={2}>
+                        <Button onClick={onClickApplyFilter} size='small' variant="contained" sx={{ padding: '0.35rem 0rem', minWidth: 120 }}>
+                            Apply filters
+                        </Button>
+                        <Button onClick={onClickClearFilter} size='small' variant="contained" color='warning' sx={{ padding: '0.35rem 0rem', minWidth: 120 }}>
+                            Clear filters
+                        </Button>
+                    </Stack>
                 </Stack>
             </ThemeProvider>
         </Container>
