@@ -1,22 +1,16 @@
 import { Autocomplete, TextField, ThemeProvider, createTheme, styled } from "@mui/material"
-import { Beer } from "../types"
 
-interface Props {
-    data: Beer[]
-}
-
-export const Search = (props: Props) => {
-    const { data } = props
+export const Search = () => {
 
     return (
         <Container>
             <ThemeProvider theme={autocompleteTheme}>
                 <Autocomplete
                     disablePortal
-                    options={data}
-                    sx={{ width: 300 }}
-                    renderInput={(params) => <TextField {...params} label="Search by names" />}
-                    getOptionLabel={(option) => option.name}
+                    options={[]}
+                    sx={{ width: 283 }}
+                    renderInput={(params) => <TextField {...params} label="Search by name" />}
+                    // getOptionLabel={(option) => option.name}
                     multiple
                     size='small'
                 />
@@ -27,8 +21,6 @@ export const Search = (props: Props) => {
 
 const Container = styled("div")({
     display: "flex",
-    flexDirection: "column",
-    gap: 16,
 })
 
 const autocompleteTheme = createTheme({
