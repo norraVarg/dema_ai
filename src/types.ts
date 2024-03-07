@@ -6,6 +6,7 @@ export interface Beer {
     description: string
     abv: number
     ingredients: Ingredients
+    food_pairing: string[]
 
 }
 

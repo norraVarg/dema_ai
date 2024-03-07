@@ -1,4 +1,4 @@
-import { Box, Modal, Typography } from "@mui/material";
+import { Box, Modal, Stack, Typography, styled } from "@mui/material";
 import { selectedBeer } from "./BeerList";
 
 export const DetailsModal = () => {
@@ -12,12 +12,40 @@ export const DetailsModal = () => {
             onClose={onClose}
         >
             <Box sx={style}>
-                <Typography id="modal-modal-title" variant="h6" component="h2">
+                <Typography variant="h6">
                     {selectedBeer.value?.name}
                 </Typography>
-                <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-                    {selectedBeer.value?.description}
-                </Typography>
+                <Stack sx={{ flexDirection: 'row', gap: 4, mt: 2 }}>
+                    <Stack gap={1.5}>
+                        <Typography sx={{ fontSize: 15 }}>
+                            {selectedBeer.value?.tagline}
+                        </Typography>
+                        <Typography sx={{ fontSize: 12, maxHeight: 200, overflowY: 'auto' }}>
+                            {selectedBeer.value?.description}
+                        </Typography>
+                        <Stack>
+                            <Typography sx={{ fontSize: 15, mb: 1 }}>
+                                Ingredients
+                            </Typography>
+                            <Typography sx={{ fontSize: 12 }}>
+                                Malt: {selectedBeer.value?.ingredients.malt.map((malt) => malt.name).join(', ')}
+                            </Typography>
+                            <Typography sx={{ fontSize: 12 }}>
+                                Hops: {selectedBeer.value?.ingredients.hops.map((hops) => hops.name).join(', ')}
+                            </Typography>
+                            <Typography sx={{ fontSize: 12 }}>
+                                Yeast: {selectedBeer.value?.ingredients.yeast}
+                            </Typography>
+                        </Stack>
+                        <Typography sx={{ fontSize: 12, }}>
+                            Food Pairing: {selectedBeer.value?.food_pairing.join(', ')}
+                        </Typography>
+                        <Typography sx={{ fontSize: 12, }}>
+                            ABV: {selectedBeer.value?.abv}
+                        </Typography>
+                    </Stack>
+                    <ImgStyled src={selectedBeer.value?.image_url} />
+                </Stack>
             </Box>
         </Modal>
     )
@@ -34,3 +62,9 @@ const style = {
     boxShadow: 24,
     p: 4,
 };
+
+const ImgStyled = styled("img")({
+    width: '20%',
+    height: '20%',
+    aspectRatio: 'auto 168/661',
+})
