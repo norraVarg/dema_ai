@@ -1,4 +1,4 @@
-import { Button, FormLabel, Stack, TextField, ThemeProvider, createTheme, styled } from "@mui/material"
+import { Button, FormLabel, Stack, SxProps, TextField, ThemeProvider, createTheme, styled } from "@mui/material"
 import { useState } from "react";
 import { filterSignal } from "../App";
 import { Signal } from "@preact/signals-react";
@@ -11,7 +11,13 @@ const DEFAULT_FILTER: Filter = {
     }
 }
 
-export const BeerFilter = () => {
+interface Props {
+    sx: SxProps
+}
+
+export const BeerFilter = (props: Props) => {
+    const { sx } = props
+
     const [filter, setFilter] = useState<Filter>(getInitialFilter(filterSignal))
 
     const onChangeMinAbv = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -59,7 +65,7 @@ export const BeerFilter = () => {
     }
 
     return (
-        <Container>
+        <Container sx={sx}>
             <ThemeProvider theme={textFieldTheme}>
                 <Stack flexDirection='row' alignItems='center' gap={2}>
                     <FormLabel>ABV</FormLabel>

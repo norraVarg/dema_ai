@@ -1,11 +1,9 @@
-import { Divider, Stack, styled } from '@mui/material'
+import { Divider, styled } from '@mui/material'
 import { BeerList } from './components/BeerList'
 import { DetailsModal } from './components/DetailsModal'
 import { BeerFilter } from './components/BeerFilter'
 import { Beer } from './types'
 import { signal } from '@preact/signals-react'
-import { Pagination } from './components/Pagination'
-import { Search } from './components/Search'
 
 export const selectedBeer = signal<Beer | null>(null)
 export const filterSignal = signal<URLSearchParams | null>(null)
@@ -17,12 +15,8 @@ const App = () => {
 
   return (
     <Container>
-      <BeerFilter />
+      <BeerFilter sx={{ minWidth: 380 }} />
       <Divider />
-      <Stack direction='row' justifyContent='space-between' >
-        <Search />
-        <Pagination />
-      </Stack>
       <BeerList />
       <DetailsModal />
     </Container>

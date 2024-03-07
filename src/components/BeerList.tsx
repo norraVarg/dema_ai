@@ -1,10 +1,12 @@
-import { ThemeProvider, Typography, createTheme, styled } from "@mui/material"
+import { Stack, ThemeProvider, Typography, createTheme, styled } from "@mui/material"
 import { DataGrid, GridColDef, GridRowParams } from "@mui/x-data-grid"
 import { useQuery } from "@tanstack/react-query"
 import { Beer } from "../types"
 import { fetchBeers } from "../api"
 import { filterSignal, selectedBeer } from "../App"
 import { useEffect } from "react"
+import { Search } from "./Search"
+import { Pagination } from "./Pagination"
 
 export const BeerList = () => {
     const { isPending, error, data, refetch } = useQuery({
@@ -25,6 +27,10 @@ export const BeerList = () => {
     }
 
     return (<Container>
+        <Stack direction='row' justifyContent='space-between' flexWrap='wrap' minWidth={380}  >
+            <Search data={data} />
+            <Pagination />
+        </Stack>
         <ThemeProvider theme={theme}>
             {data.length === 0
                 ? (<Typography sx={{ fontSize: 14 }}>No beers found.</Typography>)
@@ -74,7 +80,7 @@ const Container = styled("div")({
     display: "flex",
     flexDirection: "column",
     gap: 8,
-    height: '70vh',
+    height: '80vh',
 })
 
 const theme = createTheme({

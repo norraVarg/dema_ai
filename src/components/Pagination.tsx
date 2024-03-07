@@ -6,7 +6,6 @@ import { filterSignal } from "../App";
 const PAGE_SIZE_OPTIONS = [10, 20, 30]
 
 export const Pagination = () => {
-
     const onChangePageSize = (size: number) => {
         const url = new URL(window.location.href);
         url.searchParams.set('per_page', size.toString());
