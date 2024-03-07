@@ -1,4 +1,4 @@
-import { ThemeProvider, createTheme, styled } from "@mui/material"
+import { ThemeProvider, Typography, createTheme, styled } from "@mui/material"
 import { DataGrid, GridColDef, GridRowParams } from "@mui/x-data-grid"
 import { useQuery } from "@tanstack/react-query"
 import { Beer } from "../types"
@@ -18,8 +18,8 @@ export const BeerList = () => {
     }, [filterSignal.value])
 
     if (isPending) return (<Container>Loading...</Container>)
-
     if (error) return (<Container>An error has occurred: {error.message} </Container>)
+    if (data.length === 0) return (<Container><Typography sx={{ fontSize: 14 }}>No beers found.</Typography></Container>)
 
     console.log('data', data)
 

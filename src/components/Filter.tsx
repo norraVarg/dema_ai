@@ -1,6 +1,7 @@
 import { Button, FormLabel, Stack, TextField, ThemeProvider, Typography, createTheme, styled } from "@mui/material"
 import { useState } from "react";
 import { filterSignal } from "../App";
+import { Signal } from "@preact/signals-react";
 
 // to improve: add more filters
 interface Filter {
@@ -10,7 +11,7 @@ interface Filter {
     }
 }
 
-const INITIAL_FILTER: Filter = {
+const DEFAULT_FILTER: Filter = {
     abv: {
         abv_gt: '',
         abv_lt: '',
@@ -18,7 +19,7 @@ const INITIAL_FILTER: Filter = {
 }
 
 export const Filter = () => {
-    const [filter, setFilter] = useState<Filter>(INITIAL_FILTER)
+    const [filter, setFilter] = useState<Filter>(getInitialFilter(filterSignal))
 
     const onChangeMinAbv = (e: React.ChangeEvent<HTMLInputElement>) => {
         setFilter({
@@ -96,11 +97,25 @@ const Container = styled("div")({
     gap: 16,
 })
 
-
-
 const TextFieldTheme = createTheme({
     typography: {
         fontSize: 10,
     },
 
 });
+
+const getInitialFilter = (filterSignal: Signal<URLSearchParams | null>): Filter => {
+    if (filterSignal.value) {
+        const abv_gt = filterSignal.value.get('abv_gt');
+        const abv_lt = filterSignal.value.get('abv_lt');
+
+        return {
+            abv: {
+                abv_gt: abv_gt || '',
+                abv_lt: abv_lt || '',
+            }
+        }
+    }
+
+    return DEFAULT_FILTER;
+}

@@ -9,6 +9,10 @@ export const selectedBeer = signal<Beer | null>(null)
 export const filterSignal = signal<URLSearchParams | null>(null)
 
 const App = () => {
+  const url = new URL(window.location.href)
+  const params = new URLSearchParams(url.search)
+  filterSignal.value = params
+
   return (
     <Container>
       <Filter />
