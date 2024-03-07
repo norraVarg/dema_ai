@@ -24,31 +24,38 @@ export const DetailsModal = () => {
                         <Typography sx={{ fontSize: 12, maxHeight: 200, overflowY: 'auto' }}>
                             {selectedBeer.value?.description}
                         </Typography>
-                        <Stack>
-                            <Typography sx={{ fontSize: 15, mb: 1 }}>
-                                Ingredients
-                            </Typography>
-                            <Typography sx={{ fontSize: 12 }}>
-                                Malt: {selectedBeer.value?.ingredients.malt.map((malt) => malt.name).join(', ')}
-                            </Typography>
-                            <Typography sx={{ fontSize: 12 }}>
-                                Hops: {selectedBeer.value?.ingredients.hops.map((hops) => hops.name).join(', ')}
-                            </Typography>
-                            <Typography sx={{ fontSize: 12 }}>
-                                Yeast: {selectedBeer.value?.ingredients.yeast}
-                            </Typography>
-                        </Stack>
-                        <Typography sx={{ fontSize: 12, }}>
-                            Food Pairing: {selectedBeer.value?.food_pairing.join(', ')}
-                        </Typography>
-                        <Typography sx={{ fontSize: 12, }}>
-                            ABV: {selectedBeer.value?.abv}
-                        </Typography>
+
                     </Stack>
                     <ImgStyled src={selectedBeer.value?.image_url} />
                 </Stack>
-            </Box>
-        </Modal>
+                <Stack >
+                    <Typography sx={{ fontSize: 15, mb: 0.5 }}>
+                        Ingredients
+                    </Typography>
+                    <Stack sx={{ maxHeight: 200, overflowY: 'auto' }}>
+                        <Typography sx={{ fontSize: 12 }}>
+                            Malt: {selectedBeer.value?.ingredients.malt.map((malt) => malt.name).join(', ')}
+                        </Typography>
+                        <Typography sx={{ fontSize: 12 }}>
+                            Hops: {selectedBeer.value?.ingredients.hops.map((hops) => hops.name).join(', ')}
+                        </Typography>
+                        <Typography sx={{ fontSize: 12 }}>
+                            Yeast: {selectedBeer.value?.ingredients.yeast}
+                        </Typography>
+                    </Stack>
+                    <Typography sx={{ fontSize: 15, mb: 0.5, mt: 1 }}>
+                        Food Pairing
+                    </Typography>
+                    <Typography sx={{ fontSize: 12 }}>
+                        {selectedBeer.value?.food_pairing.join(', ')}
+                    </Typography>
+                    <Typography sx={{ fontSize: 12, mt: 1 }}>
+                        ABV: {selectedBeer.value?.abv}
+                    </Typography>
+                </Stack>
+
+            </Box >
+        </Modal >
     )
 }
 
@@ -62,10 +69,14 @@ const style = {
     border: '2px solid #000',
     boxShadow: 24,
     p: 4,
+
+    '@media only screen and (max-width: 500px)': {
+        width: 200,
+    }
 };
 
 const ImgStyled = styled("img")({
-    width: '20%',
-    height: '20%',
+    width: '15%',
+    height: '15%',
     aspectRatio: 'auto 168/661',
 })
