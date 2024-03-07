@@ -1,23 +1,25 @@
 import { ThemeProvider, createTheme, styled } from "@mui/material"
 import { DataGrid, GridColDef, GridRowParams } from "@mui/x-data-grid"
-import { signal } from "@preact/signals-react"
 import { useQuery } from "@tanstack/react-query"
 import { Beer } from "../types"
-
-export const selectedBeer = signal<Beer | null>(null)
+import { fetchBeers } from "../api"
+import { filterSignal, selectedBeer } from "../App"
+import { useEffect } from "react"
 
 export const BeerList = () => {
-    const { isPending, error, data } = useQuery({
+    const { isPending, error, data, refetch } = useQuery({
         queryKey: ['repoData'],
-        queryFn: () =>
-            fetch('https://api.punkapi.com/v2/beers').then((res) =>
-                res.json(),
-            ),
+        queryFn: () => fetchBeers(filterSignal.value),
+        refetchOnWindowFocus: false,
     })
+
+    useEffect(() => {
+        refetch()
+    }, [filterSignal.value])
 
     if (isPending) return (<Container>Loading...</Container>)
 
-    if (error) return (<Container>An error has occurred: {error.message}</Container>)
+    if (error) return (<Container>An error has occurred: {error.message} </Container>)
 
     console.log('data', data)
 

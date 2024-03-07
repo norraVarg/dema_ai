@@ -1,5 +1,5 @@
 import { Box, Modal, Stack, Typography, styled } from "@mui/material";
-import { selectedBeer } from "./BeerList";
+import { selectedBeer } from "../App";
 
 export const DetailsModal = () => {
     const onClose = () => {
