@@ -1,4 +1,4 @@
-import { styled } from "@mui/material"
+import { ThemeProvider, createTheme, styled } from "@mui/material"
 import { DataGrid, GridColDef, GridRowParams } from "@mui/x-data-grid"
 import { signal } from "@preact/signals-react"
 import { useQuery } from "@tanstack/react-query"
@@ -26,20 +26,24 @@ export const BeerList = () => {
     }
 
     return (<Container>
-        <DataGridStyled
-            rows={data}
-            columns={columns}
-            initialState={{
-                pagination: {
-                    paginationModel: {
-                        pageSize: PAGE_SIZE_OPTIONS[0],
+        <ThemeProvider theme={dataGridTheme}>
+            <DataGridStyled
+                rows={data}
+                columns={columns}
+                initialState={{
+                    pagination: {
+                        paginationModel: {
+                            pageSize: PAGE_SIZE_OPTIONS[0],
+                        },
                     },
-                },
-            }}
-            pageSizeOptions={PAGE_SIZE_OPTIONS}
-            disableRowSelectionOnClick
-            onRowClick={(params) => onRowClick(params)}
-        />
+                }}
+                pageSizeOptions={PAGE_SIZE_OPTIONS}
+                disableRowSelectionOnClick
+                onRowClick={(params) => onRowClick(params)}
+                rowHeight={40}
+                columnHeaderHeight={40}
+            />
+        </ThemeProvider>
     </Container>)
 }
 
@@ -80,13 +84,47 @@ const Container = styled("div")({
     flexDirection: "column",
 })
 
+const dataGridTheme = createTheme({
+    components: {
+        MuiPaper: {
+            styleOverrides: {
+                root: {
+                    '& .MuiMenuItem-root': {
+                        fontSize: 12,
+                    },
+                },
+            },
+        },
+    },
+});
+
 const DataGridStyled = styled(DataGrid)({
     '.MuiDataGrid-row': {
         cursor: "pointer",
+    },
+    '.MuiDataGrid-columnHeader': {
+        fontSize: 16,
+    },
+    '.MuiDataGrid-cell': {
+        fontSize: 12,
+    },
+    '.MuiDataGrid-footerContainer': {
+        minHeight: 32,
+
+    },
+    '.MuiTablePagination-root': {
+        '& .MuiToolbar-root': {
+            minHeight: 32,
+        },
+        '& *': {
+            fontSize: 12,
+            marginTop: 0,
+            marginBottom: 0,
+        }
     }
 })
 
 const ImgStyled = styled("img")({
-    width: '12%',
+    width: '8%',
     aspectRatio: 'auto 168/661',
 })
