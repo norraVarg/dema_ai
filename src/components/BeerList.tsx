@@ -35,8 +35,8 @@ export const BeerList = () => {
                     disableRowSelectionOnClick
                     onRowClick={(params) => onRowClick(params)}
                     rowHeight={40}
-                    columnHeaderHeight={40} />
-                )}
+                    columnHeaderHeight={40}
+                />)}
         </ThemeProvider>
     </Container>)
 }
@@ -74,9 +74,13 @@ const Container = styled("div")({
     display: "flex",
     flexDirection: "column",
     gap: 8,
+    height: '70vh',
 })
 
 const theme = createTheme({
+    typography: {
+        fontSize: 10,
+    },
     components: {
         MuiPaper: {
             styleOverrides: {
@@ -95,7 +99,7 @@ const DataGridStyled = styled(DataGrid)({
         cursor: "pointer",
     },
     '.MuiDataGrid-columnHeader': {
-        fontSize: 16,
+        fontSize: 14,
     },
     '.MuiDataGrid-cell': {
         fontSize: 12,
