@@ -1,15 +1,8 @@
-import { Button, FormLabel, Stack, TextField, ThemeProvider, Typography, createTheme, styled } from "@mui/material"
+import { Button, FormLabel, Stack, TextField, ThemeProvider, createTheme, styled } from "@mui/material"
 import { useState } from "react";
 import { filterSignal } from "../App";
 import { Signal } from "@preact/signals-react";
-
-// to improve: add more filters
-interface Filter {
-    abv: {
-        abv_gt: string,
-        abv_lt: string,
-    }
-}
+import { Filter } from "../types";
 
 const DEFAULT_FILTER: Filter = {
     abv: {
@@ -18,7 +11,7 @@ const DEFAULT_FILTER: Filter = {
     }
 }
 
-export const Filter = () => {
+export const BeerFilter = () => {
     const [filter, setFilter] = useState<Filter>(getInitialFilter(filterSignal))
 
     const onChangeMinAbv = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -48,14 +41,14 @@ export const Filter = () => {
         const minAbv = filter.abv.abv_gt;
         const maxAbv = filter.abv.abv_lt;
 
-        if (minAbv) {
-            url.searchParams.set('abv_gt', minAbv.toString());
+        if (minAbv !== '') {
+            url.searchParams.set('abv_gt', minAbv);
         } else {
             url.searchParams.delete('abv_gt');
         }
 
-        if (maxAbv) {
-            url.searchParams.set('abv_lt', maxAbv.toString());
+        if (maxAbv !== '') {
+            url.searchParams.set('abv_lt', maxAbv);
         } else {
             url.searchParams.delete('abv_lt');
         }
@@ -67,24 +60,21 @@ export const Filter = () => {
 
     return (
         <Container>
-            <ThemeProvider theme={TextFieldTheme}>
-                <Typography variant="h6" fontSize={20}>
-                    Filters
-                </Typography>
+            <ThemeProvider theme={textFieldTheme}>
                 <Stack flexDirection='row' alignItems='center' gap={2}>
                     <FormLabel>ABV</FormLabel>
                     <TextField
                         value={filter.abv.abv_gt}
                         onChange={onChangeMinAbv}
                         label="Min" variant="outlined" size="small" type='number' sx={{ width: 100 }} />
-                    <span> - </span>
+                    <span>-</span>
                     <TextField
                         value={filter.abv.abv_lt}
                         onChange={onChangeMaxAbv}
                         label="Max" variant="outlined" size="small" type='number' sx={{ width: 100 }} />
-                    <Button
-                        onClick={onClickApplyFilter}
-                        variant="contained" >Apply</Button>
+                    <Button onClick={onClickApplyFilter} variant="contained" sx={{ padding: '0.34rem', width: 160 }}>
+                        Apply filters
+                    </Button>
                 </Stack>
             </ThemeProvider>
         </Container>
@@ -97,11 +87,10 @@ const Container = styled("div")({
     gap: 16,
 })
 
-const TextFieldTheme = createTheme({
+const textFieldTheme = createTheme({
     typography: {
         fontSize: 10,
     },
-
 });
 
 const getInitialFilter = (filterSignal: Signal<URLSearchParams | null>): Filter => {

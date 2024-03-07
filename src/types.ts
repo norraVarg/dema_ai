@@ -29,3 +29,11 @@ export interface Ingredients {
     }[]
     yeast: string
 }
+
+// to improve: add more filters
+export interface Filter {
+    abv: {
+        abv_gt: string,
+        abv_lt: string,
+    }
+}

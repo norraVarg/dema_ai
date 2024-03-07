@@ -1,6 +1,7 @@
 import { Box, Modal, Stack, Typography, styled } from "@mui/material";
 import { selectedBeer } from "../App";
 
+// to improve: add more details
 export const DetailsModal = () => {
     const onClose = () => {
         selectedBeer.value = null

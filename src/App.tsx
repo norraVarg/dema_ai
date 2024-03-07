@@ -1,7 +1,7 @@
 import { styled } from '@mui/material'
 import { BeerList } from './components/BeerList'
 import { DetailsModal } from './components/DetailsModal'
-import { Filter } from './components/Filter'
+import { BeerFilter } from './components/BeerFilter'
 import { Beer } from './types'
 import { signal } from '@preact/signals-react'
 
@@ -15,7 +15,7 @@ const App = () => {
 
   return (
     <Container>
-      <Filter />
+      <BeerFilter />
       <BeerList />
       <DetailsModal />
     </Container>

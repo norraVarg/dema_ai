@@ -5,6 +5,10 @@ import { Beer } from "../types"
 import { fetchBeers } from "../api"
 import { filterSignal, selectedBeer } from "../App"
 import { useEffect } from "react"
+import { Search } from "./Search"
+import { signal } from "@preact/signals-react"
+
+export const beersSignal = signal<Beer[]>([])
 
 export const BeerList = () => {
     const { isPending, error, data, refetch } = useQuery({
@@ -21,6 +25,7 @@ export const BeerList = () => {
     if (error) return (<Container>An error has occurred: {error.message} </Container>)
     if (data.length === 0) return (<Container><Typography sx={{ fontSize: 14 }}>No beers found.</Typography></Container>)
 
+    beersSignal.value = data
     console.log('data', data)
 
     const onRowClick = (params: GridRowParams<any>) => {
@@ -28,9 +33,10 @@ export const BeerList = () => {
     }
 
     return (<Container>
-        <ThemeProvider theme={dataGridTheme}>
+        <ThemeProvider theme={theme}>
+            <Search data={beersSignal.value} />
             <DataGridStyled
-                rows={data}
+                rows={beersSignal.value}
                 columns={columns}
                 initialState={{
                     pagination: {
@@ -75,7 +81,6 @@ const columns: GridColDef[] = [
         minWidth: 120,
         filterable: false,
         renderCell: (params) => {
-            console.log('params', params.row.image_url)
             return (<ImgStyled src={params.row.image_url} />)
         }
     },
@@ -84,9 +89,10 @@ const columns: GridColDef[] = [
 const Container = styled("div")({
     display: "flex",
     flexDirection: "column",
+    gap: 16,
 })
 
-const dataGridTheme = createTheme({
+const theme = createTheme({
     components: {
         MuiPaper: {
             styleOverrides: {
