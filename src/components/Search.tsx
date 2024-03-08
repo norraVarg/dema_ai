@@ -1,7 +1,7 @@
 import { Autocomplete, TextField, ThemeProvider, createTheme, styled } from "@mui/material"
-import { filterSignal } from "../App"
 import { Beer } from "../types"
 import { computed } from "@preact/signals-react"
+import { filterSignal } from "../signals"
 
 interface Props {
     data: Beer[]
@@ -40,7 +40,7 @@ export const Search = (props: Props) => {
         filterSignal.value = url.searchParams;
     }
 
-    const onChangeSelect = (_: React.ChangeEvent<{}>, beer: Beer | null) => {
+    const onChangeSelect = (beer: Beer | null) => {
         const url = new URL(window.location.href);
 
         if (beer) {
@@ -61,7 +61,7 @@ export const Search = (props: Props) => {
                     renderInput={(params) => {
                         return <TextField {...params} onChange={onChangeInput} label="Search by name" />
                     }}
-                    onChange={onChangeSelect}
+                    onChange={(_, beer) => onChangeSelect(beer)}
                     isOptionEqualToValue={(option, value) => option.name === value.name}
                     getOptionLabel={(option) => option.name}
                     size='small'

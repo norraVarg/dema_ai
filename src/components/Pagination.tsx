@@ -1,7 +1,7 @@
 import { Autocomplete, IconButton, Stack, TextField, ThemeProvider, Typography, createTheme, styled } from "@mui/material"
 import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft';
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
-import { filterSignal } from "../App";
+import { filterSignal } from "../signals";
 
 const PAGE_SIZE_OPTIONS = [10, 20, 30]
 

@@ -3,10 +3,10 @@ import { DataGrid, GridColDef, GridRowParams } from "@mui/x-data-grid"
 import { useQuery } from "@tanstack/react-query"
 import { Beer } from "../types"
 import { fetchBeers } from "../api"
-import { filterSignal, selectedBeer } from "../App"
 import { useEffect } from "react"
 import { Search } from "./Search"
 import { Pagination } from "./Pagination"
+import { filterSignal, selectedBeer } from "../signals"
 
 export const BeerList = () => {
     const { isPending, error, data, refetch } = useQuery({
@@ -17,12 +17,12 @@ export const BeerList = () => {
 
     useEffect(() => {
         refetch()
-    }, [filterSignal.value])
+    }, [filterSignal.value, refetch])
 
     if (isPending) return (<Typography sx={{ fontSize: 14 }}>Loading...</Typography>)
     if (error) return (<Typography sx={{ fontSize: 14 }}>An error has occurred: {error.message} </Typography>)
 
-    const onRowClick = (params: GridRowParams<any>) => {
+    const onRowClick = (params: GridRowParams) => {
         selectedBeer.value = params.row as Beer
     }
 

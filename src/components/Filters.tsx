@@ -1,8 +1,8 @@
 import { Button, FormLabel, Stack, SxProps, TextField, ThemeProvider, createTheme, styled } from "@mui/material"
 import { useState } from "react";
-import { filterSignal } from "../App";
 import { Signal } from "@preact/signals-react";
 import { Filter } from "../types";
+import { filterSignal } from "../signals";
 
 const DEFAULT_FILTER: Filter = {
     abv: {

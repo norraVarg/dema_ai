@@ -2,11 +2,7 @@ import { Divider, styled } from '@mui/material'
 import { BeerList } from './components/BeerList'
 import { DetailsModal } from './components/DetailsModal'
 import { Filters } from './components/Filters'
-import { Beer } from './types'
-import { signal } from '@preact/signals-react'
-
-export const selectedBeer = signal<Beer | null>(null)
-export const filterSignal = signal<URLSearchParams | null>(null)
+import { filterSignal } from './signals'
 
 const App = () => {
   const url = new URL(window.location.href)

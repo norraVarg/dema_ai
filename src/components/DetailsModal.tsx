@@ -1,5 +1,5 @@
 import { Box, Modal, Stack, Typography, styled } from "@mui/material";
-import { selectedBeer } from "../App";
+import { selectedBeer } from "../signals";
 
 // to improve: add more details
 export const DetailsModal = () => {
