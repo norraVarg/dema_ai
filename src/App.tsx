@@ -1,7 +1,7 @@
 import { Divider, styled } from '@mui/material'
 import { BeerList } from './components/BeerList'
 import { DetailsModal } from './components/DetailsModal'
-import { BeerFilter } from './components/BeerFilter'
+import { Filters } from './components/Filters'
 import { Beer } from './types'
 import { signal } from '@preact/signals-react'
 
@@ -15,7 +15,7 @@ const App = () => {
 
   return (
     <Container>
-      <BeerFilter sx={{ minWidth: 380 }} />
+      <Filters sx={{ minWidth: 380 }} />
       <Divider />
       <BeerList />
       <DetailsModal />

@@ -15,7 +15,7 @@ interface Props {
     sx: SxProps
 }
 
-export const BeerFilter = (props: Props) => {
+export const Filters = (props: Props) => {
     const { sx } = props
 
     const [filter, setFilter] = useState<Filter>(getInitialFilter(filterSignal))
