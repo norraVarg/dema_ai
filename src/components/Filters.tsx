@@ -89,10 +89,10 @@ export const Filters = (props: Props) => {
                         label="Max" variant="outlined" size="small" type='number' sx={{ width: 100 }} />
                     <Stack direction={'row'} gap={2}>
                         <Button onClick={onClickApplyFilter} size='small' variant="contained" sx={{ padding: '0.35rem 0rem', minWidth: 120 }}>
-                            Apply filters
+                            APPLY FILTERS
                         </Button>
                         <Button onClick={onClickClearFilter} size='small' variant="contained" color='warning' sx={{ padding: '0.35rem 0rem', minWidth: 120 }}>
-                            Clear filters
+                            CLEAR FILTERS
                         </Button>
                     </Stack>
                 </Stack>

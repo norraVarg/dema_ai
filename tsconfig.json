@@ -26,7 +26,8 @@
     "noFallthroughCasesInSwitch": true
   },
   "include": [
-    "src"
+    "src",
+    "cypress/components/DetailsModal.cy.tsx"
   ],
   "references": [
     {
