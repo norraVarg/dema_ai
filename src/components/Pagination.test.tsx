@@ -1,4 +1,5 @@
 import { getPage, getPageSize, isFirstPage } from "./Pagination.utils";
+import { describe, it, expect } from "vitest";
 
 describe('getPageSize', () => {
     it('should return 10 when no params are passed', () => {
