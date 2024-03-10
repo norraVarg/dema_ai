@@ -2,10 +2,9 @@ import { Autocomplete, IconButton, Stack, TextField, ThemeProvider, Typography, 
 import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft';
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 import { filterSignal } from "../signals";
+import { PAGE_SIZE_OPTIONS, getPage, getPageSize, isFirstPage } from "./Pagination.utils";
 
-const PAGE_SIZE_OPTIONS = [10, 20, 30]
-
-export const Pagination = () => {
+export const Pagination = (): JSX.Element => {
     const onChangePageSize = (size: number) => {
         const url = new URL(window.location.href);
         url.searchParams.set('per_page', size.toString());
@@ -31,7 +30,7 @@ export const Pagination = () => {
 
     return (<Container>
         <ThemeProvider theme={theme}>
-            <Stack direction='row' alignItems='center'>
+            <Stack direction='row' alignItems='center' data-testid='pagination'>
                 <Typography sx={{ fontSize: 12 }}>Items per page:</Typography>
                 <Autocomplete
                     disablePortal
@@ -64,34 +63,6 @@ const Container = styled("div")({
     alignItems: "center",
     justifyContent: "flex-end",
 })
-
-
-const getPageSize = (params: URLSearchParams | null) => {
-    if (!params) {
-        return PAGE_SIZE_OPTIONS[0]
-    }
-
-    const pageSize = params.get('per_page')
-    return pageSize ? parseInt(pageSize) : PAGE_SIZE_OPTIONS[0]
-}
-
-const getPage = (params: URLSearchParams | null) => {
-    if (!params) {
-        return 1
-    }
-
-    const page = params.get('page')
-    return page ? parseInt(page) : 1
-}
-
-const isFirstPage = (params: URLSearchParams | null) => {
-    if (!params) {
-        return true
-    }
-
-    const page = params.get('page')
-    return page ? parseInt(page) === 1 : true
-}
 
 const theme = createTheme({
     typography: {
