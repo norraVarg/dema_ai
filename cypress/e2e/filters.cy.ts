@@ -4,6 +4,8 @@ describe('filters', () => {
   it('should fetch items by abv filter and update search params', () => {
     cy.visit('http://localhost:5173')
 
+    cy.get('div.MuiDataGrid-row').should('have.length', 10)
+
     cy.contains('Min').parent('div').find('input').type('2')
     cy.contains('Max').parent('div').find('input').type('3')
     cy.contains('APPLY FILTERS').click()
