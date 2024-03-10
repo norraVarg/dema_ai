@@ -2,7 +2,7 @@ import { Divider, styled } from '@mui/material'
 import { BeerList } from './components/BeerList'
 import { DetailsModal } from './components/DetailsModal'
 import { Filters } from './components/Filters'
-import { filterSignal } from './signals'
+import { filterSignal, selectedBeer } from './signals'
 
 const App = () => {
   const url = new URL(window.location.href)
@@ -14,7 +14,7 @@ const App = () => {
       <Filters sx={{ minWidth: 380 }} />
       <Divider />
       <BeerList />
-      <DetailsModal />
+      <DetailsModal selectedBeer={selectedBeer} />
     </Container>
   )
 }

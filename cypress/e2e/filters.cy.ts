@@ -1,6 +1,6 @@
 /// <reference types="cypress" />
 
-describe('filters', () => {
+describe('Filters', () => {
   it('should fetch items by abv filter and update search params', () => {
     cy.visit('http://localhost:5173')
 

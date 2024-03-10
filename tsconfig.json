@@ -27,7 +27,7 @@
   },
   "include": [
     "src",
-    "cypress/components/DetailsModal.cy.tsx"
+    "cypress",
   ],
   "references": [
     {

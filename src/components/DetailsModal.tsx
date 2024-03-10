@@ -1,8 +1,15 @@
 import { Box, Modal, Stack, Typography, styled } from "@mui/material";
-import { selectedBeer } from "../signals";
+import { Signal } from "@preact/signals-react";
+import { Beer } from "../types";
+
+interface Props {
+    selectedBeer: Signal<Beer | null>
+}
 
 // to improve: add more details
-export const DetailsModal = () => {
+export const DetailsModal = (props: Props) => {
+    const { selectedBeer } = props
+
     const onClose = () => {
         selectedBeer.value = null
     }
